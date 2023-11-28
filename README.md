@@ -8,4 +8,5 @@ This module can be used to create pygame applications.
 ## develop
 
 ### schedule
-
+ - [ ] (1) DescriptorBasis.Descriptor
+ - [ ] ()
