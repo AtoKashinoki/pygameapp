@@ -9,4 +9,4 @@ This module can be used to create pygame applications.
 
 ### schedule
  - [x] (1) Descriptor.Descriptor
- - [ ] (2) Descriptor.ContainerValidator
+ - [x] (2) Descriptor.ContainerValidatorDecorator
