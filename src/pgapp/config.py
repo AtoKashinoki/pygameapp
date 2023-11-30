@@ -8,7 +8,7 @@ from pgapp.descriptor import (
     ContainerValidateDecorator as _ContainerValidateDecorator,
     ValidatorFramework as _ValidatorFramework,
     built_in_validate_function as _built_in_validate_function,
-    ContainerValidatorDescriptors as _ContainerValidatorDescriptors
+    ContainerValidatorDescriptors as _ContainerValidatorDescriptors,
 )
 
 
@@ -39,6 +39,21 @@ class ConfigTuple(tuple, _ContainerValidatorDescriptors):
 
 
 """ Config class """
+
+
+def write_config(file_path: str, config_dict: dict) -> None:
+    """
+        Write config file.
+    :param file_path: config file to write.
+    :param config_dict: config data.
+    """
+    # write config file
+    with open(file=file_path, mode="w", encoding="utf-8") as write_file:
+        [
+            print(f"{key}: {value}", file=write_file)
+            for key, value in config_dict.items()
+        ]
+    return
 
 
 @_ContainerValidateDecorator(str, int, float, bool, tuple, None)
@@ -123,15 +138,7 @@ class Config(dict, _ValidatorFramework):
         return
 
     def write(self) -> None:
-        """
-            Write config file.
-        """
-        # write config file
-        with open(file=self.file_path, mode="w", encoding="utf-8") as write_file:
-            [
-                print(f"{key}: {value}", file=write_file)
-                for key, value in self.items()
-            ]
+        write_config(self.file_path, self)
         return
 
     def __setitem__(self, key, value) -> None:
