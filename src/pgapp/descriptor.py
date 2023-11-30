@@ -3,7 +3,7 @@
 """
 
 # import abc
-from abc import ABC as _ABC, abstractmethod as _abstractmethod
+import abc as _abc
 
 
 """ validate function """
@@ -33,7 +33,7 @@ def _built_in_validate_function(checking: any, validate_condition: tuple[any]) -
 """ Descriptor framework """
 
 
-class DescriptorFramework(_ABC):
+class DescriptorFramework(_abc.ABC):
     """
         Descriptor framework class
 
@@ -65,7 +65,7 @@ class DescriptorFramework(_ABC):
         """ Return initial value assigned during self-initialization """
         return self.__initial_value
 
-    @_abstractmethod
+    @_abc.abstractmethod
     def validator(self, value: any) -> None:
         """
             Validator add-on on assignment.
@@ -122,14 +122,14 @@ class Descriptor(DescriptorFramework):
 """ Validator framework """
 
 
-class ValidatorFramework(_ABC):
+class ValidatorFramework(_abc.ABC):
     """
         Validator class framework.
 
     This class is inheritance class.
     Can be used to create a framework for validator classes.
     """
-    @_abstractmethod
+    @_abc.abstractmethod
     def validator(self, key: str | int | tuple, value: any) -> None:
         """
             Validator add-on on assignment.
@@ -146,7 +146,7 @@ class _tupleValidator(tuple):
     ...
 
 
-class _ContainerValidatorDescriptors(_ABC):
+class _ContainerValidatorDescriptors(_abc.ABC):
     """
         Container validator class's descriptor
     """
@@ -154,7 +154,7 @@ class _ContainerValidatorDescriptors(_ABC):
     built_in_validate_value_types = Descriptor(_tupleValidator)
     built_in_validate_key_types = Descriptor(_tupleValidator)
 
-    @_abstractmethod
+    @_abc.abstractmethod
     def __setitem__(self, key, value): ...
 
 
