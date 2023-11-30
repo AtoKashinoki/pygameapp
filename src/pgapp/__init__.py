@@ -13,6 +13,7 @@ import pygame
 import numpy
 
 # import self modules
+from pgapp import config
 
 
 """ print self name and version """

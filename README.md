@@ -14,5 +14,5 @@ This module can be used to create pygame applications.
    - [x] (2) ValidatorFramework class
    - [x] (3) ContainerValidatorDecorator class
  - [ ] config.py
-   - [ ] (1) Config class
+   - [x] (1) Config class
    - [ ] (2) initialize config directory and display config
