@@ -9,7 +9,7 @@ import abc as _abc
 """ validate function """
 
 
-def _built_in_validate_function(checking: any, validate_condition: tuple[any]) -> None:
+def built_in_validate_function(checking: any, validate_condition: tuple[any]) -> None:
     """
         Built-in validate.
     :param checking: data to validate.
@@ -17,7 +17,8 @@ def _built_in_validate_function(checking: any, validate_condition: tuple[any]) -
     """
     # Error response function
     def built_in_validate_error() -> None:
-        raise TypeError(f"This value type cannot be assigned: {type(checking)}('{checking}')")
+        raise TypeError(f"This value type cannot be assigned: {type(checking)}('{checking}')\n"
+                        f"-> Types can use: {validate_condition}")
 
     # validate
     if any in validate_condition:
@@ -92,7 +93,7 @@ class DescriptorFramework(_abc.ABC):
 
         # validate value
         # built-in
-        _built_in_validate_function(value, self.__built_in_validate)
+        built_in_validate_function(value, self.__built_in_validate)
 
         #  add-on
         self.validator(value)
@@ -146,7 +147,7 @@ class _tupleValidator(tuple):
     ...
 
 
-class _ContainerValidatorDescriptors(_abc.ABC):
+class ContainerValidatorDescriptors(_abc.ABC):
     """
         Container validator class's descriptor
     """
@@ -166,7 +167,7 @@ def _get_ContainerValidator(instance, container):
     :return: Validator class inherited from container class.
     """
 
-    class ContainerValidator(container, _ContainerValidatorDescriptors):
+    class ContainerValidator(container, ContainerValidatorDescriptors):
         """
             Container validate class
 
@@ -206,7 +207,7 @@ def _get_ContainerValidator(instance, container):
             # validator
             #  built-in
             [
-                _built_in_validate_function(*args)
+                built_in_validate_function(*args)
                 for args in zip(
                     [key, value], [self.built_in_validate_key_types, self.built_in_validate_value_types]
                 )
@@ -253,7 +254,7 @@ class ContainerValidateDecorator:
 
     def __call__(
             self, container: tuple | list | dict | set | object
-    ) -> type[tuple | list | dict | set | object | _ContainerValidatorDescriptors]:
+    ) -> type[tuple | list | dict | set | object | ContainerValidatorDescriptors]:
         """
             Wrap container classes with validators.
         :param container: Container class wrapped in a validator.
