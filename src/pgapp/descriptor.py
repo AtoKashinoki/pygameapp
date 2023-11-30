@@ -174,7 +174,7 @@ def _get_ContainerValidator(instance, container):
         Return class from _get_ContainerValidator function.
         """
 
-        def __init__(self, *args):
+        def __init__(self, *args, **kwargs):
             """
                 Initialize validate conditions and container class.
             :param args: Initial container class key and values.
@@ -188,11 +188,11 @@ def _get_ContainerValidator(instance, container):
 
             # initialize container
             if instance.initial_assignment[0]:
-                container.__init__(self, *args)
+                container.__init__(self, *args, **kwargs)
             else:
                 if not len(args) == 0:
                     raise TypeError(f"Initial assignment rejection: initial_assignment = False")
-                container.__init__(self)
+                container.__init__(self, **kwargs)
 
             return
 
