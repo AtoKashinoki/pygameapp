@@ -7,8 +7,8 @@ from pgapp.descriptor import (
     Descriptor as _Descriptor,
     ContainerValidateDecorator as _ContainerValidateDecorator,
     ValidatorBlueprint as _ValidatorBlueprint,
+    ContainerValidatorBlueprint as _ContainerValidatorDescriptors,
     built_in_validate_function as _built_in_validate_function,
-    ContainerValidatorDescriptors as _ContainerValidatorDescriptors,
 )
 
 

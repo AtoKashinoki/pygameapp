@@ -147,7 +147,7 @@ class _tupleValidator(tuple):
     ...
 
 
-class ContainerValidatorDescriptors(_abc.ABC):
+class ContainerValidatorBlueprint(_abc.ABC):
     """
         Container validator class's descriptor
     """
