@@ -35,7 +35,8 @@ class ConfigTuple(tuple, _ContainerValidatorBlueprint):
         return
 
     def __setitem__(self, key, value): ...
-    def validator(self, key: int, value: any) -> None: ...
+    def validator(self, key: int, value: any) -> None:
+        print("exe")
 
 
 """ Config class """
@@ -50,6 +51,7 @@ def write_config(file_path: str, config_dict: dict) -> None:
     # write config file
     with open(file=file_path, mode="w", encoding="utf-8") as write_file:
         [
+            print(f'"" {value}', file=write_file) if key[0:2] == '""' else
             print(f"{key}: {value}", file=write_file)
             for key, value in config_dict.items()
         ]
@@ -121,17 +123,22 @@ class Config(dict, _ValidatorBlueprint):
 
         # Read and create config dict
         with open(file=self.file_path, mode="r", encoding="utf-8") as config_file:
-            config_dict = dict([
-                [key, change_type(value)]
-                for line in config_file.readlines()
-                for key, value in [
-                    line
-                    .replace(": ", ":")
-                    .replace(":", ": ")
-                    .replace("\n", "")
-                    .split(": ")
-                ]
-            ])
+            try:
+                config_dict = dict([
+                    [f'""{i}', self.__re.sub(r"^ ", "", value)] if key[0:2] == '""' else
+                    [key, change_type(value)]
+                    for i, line in enumerate(config_file.readlines())
+                    for key, value in [
+                        self.__re.findall(
+                            r'""|[^:]+',
+                            line
+                            .replace(": ", ":")
+                            .replace("\n", "")
+                        )
+                    ]
+                ])
+            except ValueError:
+                raise TypeError(f"Could not read config file: {self.file_path}")
 
             # update config
             super().__init__(config_dict)

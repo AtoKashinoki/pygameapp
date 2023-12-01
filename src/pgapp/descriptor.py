@@ -147,7 +147,7 @@ class _tupleValidator(tuple):
     ...
 
 
-class ContainerValidatorBlueprint(_abc.ABC):
+class ContainerValidatorBlueprint(ValidatorBlueprint):
     """
         Container validator class's descriptor
     """
@@ -156,7 +156,16 @@ class ContainerValidatorBlueprint(_abc.ABC):
     built_in_validate_key_types = Descriptor(_tupleValidator)
 
     @_abc.abstractmethod
-    def __setitem__(self, key, value): ...
+    def __setitem__(self, key, value):
+        """
+            Validate key and value.
+        :param key: container key.
+        :param value: container value.
+        """
+        return
+
+    @_abc.abstractmethod
+    def validator(self, key: str | int | tuple, value: any) -> None: ...
 
 
 def _get_ContainerValidator(instance, container):
@@ -167,7 +176,7 @@ def _get_ContainerValidator(instance, container):
     :return: Validator class inherited from container class.
     """
 
-    class ContainerValidator(container, ContainerValidatorDescriptors):
+    class ContainerValidator(container, ContainerValidatorBlueprint):
         """
             Container validate class
 
@@ -254,7 +263,7 @@ class ContainerValidateDecorator:
 
     def __call__(
             self, container: tuple | list | dict | set | object
-    ) -> type[tuple | list | dict | set | object | ContainerValidatorDescriptors]:
+    ) -> type[tuple | list | dict | set | object | ContainerValidatorBlueprint]:
         """
             Wrap container classes with validators.
         :param container: Container class wrapped in a validator.
