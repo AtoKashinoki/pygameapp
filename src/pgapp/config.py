@@ -51,7 +51,7 @@ def write_config(file_path: str, config_dict: dict) -> None:
     # write config file
     with open(file=file_path, mode="w", encoding="utf-8") as write_file:
         [
-            print(f'"" {value}', file=write_file) if key[0:2] == '""' else
+            print(f"'' {value}", file=write_file) if key[0:2] == "''" else
             print(f"{key}: {value}", file=write_file)
             for key, value in config_dict.items()
         ]
@@ -125,15 +125,16 @@ class Config(dict, _ValidatorBlueprint):
         with open(file=self.file_path, mode="r", encoding="utf-8") as config_file:
             try:
                 config_dict = dict([
-                    [f'""{i}', self.__re.sub(r"^ ", "", value)] if key[0:2] == '""' else
+                    [f"''{i}", self.__re.sub(r"^ ", "", value)] if key[0:2] == "''" else
                     [key, change_type(value)]
                     for i, line in enumerate(config_file.readlines())
                     for key, value in [
                         self.__re.findall(
-                            r'""|[^:]+',
+                            r"''|[^:]+",
                             line
                             .replace(": ", ":")
                             .replace("\n", "")
+                            .replace('""', "''")
                         )
                     ]
                 ])
