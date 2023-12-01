@@ -2,11 +2,11 @@
     config classes
 """
 
-# import descriptor
+# import descriptors
 from pgapp.descriptor import (
     Descriptor as _Descriptor,
     ContainerValidateDecorator as _ContainerValidateDecorator,
-    ValidatorFramework as _ValidatorFramework,
+    ValidatorBlueprint as _ValidatorBlueprint,
     built_in_validate_function as _built_in_validate_function,
     ContainerValidatorDescriptors as _ContainerValidatorDescriptors,
 )
@@ -57,7 +57,7 @@ def write_config(file_path: str, config_dict: dict) -> None:
 
 
 @_ContainerValidateDecorator(str, int, float, bool, tuple, None)
-class Config(dict, _ValidatorFramework):
+class Config(dict, _ValidatorBlueprint):
     """
         Config management class.
 

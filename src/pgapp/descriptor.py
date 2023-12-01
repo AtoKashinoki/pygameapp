@@ -123,7 +123,7 @@ class Descriptor(DescriptorFramework):
 """ Validator framework """
 
 
-class ValidatorFramework(_abc.ABC):
+class ValidatorBlueprint(_abc.ABC):
     """
         Validator class framework.
 
