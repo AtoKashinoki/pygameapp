@@ -7,7 +7,7 @@ from pgapp.descriptor import (
     Descriptor as _Descriptor,
     ContainerValidateDecorator as _ContainerValidateDecorator,
     ValidatorBlueprint as _ValidatorBlueprint,
-    ContainerValidatorBlueprint as _ContainerValidatorDescriptors,
+    ContainerValidatorBlueprint as _ContainerValidatorBlueprint,
     built_in_validate_function as _built_in_validate_function,
 )
 
@@ -19,7 +19,7 @@ from pgapp.descriptor import (
     str, int, float, bool, None,
     initial_assignment=True
 )
-class ConfigTuple(tuple, _ContainerValidatorDescriptors):
+class ConfigTuple(tuple, _ContainerValidatorBlueprint):
     """
         Config tuple validator.
 
