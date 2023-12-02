@@ -9,7 +9,7 @@ import abc as _abc
 """ validate function """
 
 
-def built_in_validate_function(checking: any, validate_condition: tuple[any]) -> None:
+def built_in_validate_function(checking: any, validate_condition: tuple) -> None:
     """
         Built-in validate.
     :param checking: data to validate.
