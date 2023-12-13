@@ -13,15 +13,13 @@ from pgapp.display.type.descriptor import (
 )
 
 # import ObjectFramework
-from pgapp.display.ObjectFramework import (
-    ObjectFramework as _ObjectFramework
-)
+from pgapp.display import ObjectFramework as _ObjectFramework
 
 
 """ Blueprint class """
 
 
-class Blueprint(_ObjectFramework, _abc.ABC):
+class Blueprint(_ObjectFramework.Blueprint, _abc.ABC):
     """
         Surface blueprint class.
 
