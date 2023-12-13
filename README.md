@@ -17,14 +17,14 @@ This module can be used to create pygame applications.
    - [x] (1) Config class
    - [x] (2) initialize config directory and display config
  - [ ] display
-   - [ ] ObjectFramework.py
-     - [ ] (1) ObjectFramework class
+   - [x] ObjectFramework.py
+     - [x] (1) ObjectFramework class
    - [ ] Surface.py
      - [ ] (1) Blueprint class
      - [ ] (2) Surface rapper
-   - [ ] Object.py
+   - [ ] Objects.py
      - [ ] (1) Blueprint class
-     - [ ] (2) Object rapper
+     - [ ] (2) Objects rapper
    - [ ] UI.py
      - [ ] (1) Blueprint class
      - [ ] (2) UI rapper

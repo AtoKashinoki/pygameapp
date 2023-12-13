@@ -8,13 +8,12 @@ import os
 import glob as _glob
 import pkg_resources
 
-# import main modules
-import pygame
-import numpy
-
 # import self modules
 from pgapp.descriptor import Descriptor as _Descriptor
-from pgapp import config
+from pgapp import (
+    config,
+    display,
+)
 
 
 """ print self name and version """

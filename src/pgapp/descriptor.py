@@ -9,16 +9,25 @@ import abc as _abc
 """ validate function """
 
 
-def built_in_validate_function(checking: any, validate_condition: tuple) -> None:
+def built_in_validate_function(checking: any, validate_condition: tuple, mode: str = "P") -> None:
     """
         Built-in validate.
+
+    mode:
+        P: Perfect matching.
+        B: Base class matching.
     :param checking: data to validate.
     :param validate_condition: validate conditions.
+    :param mode: Built-in validator matching mode.
     """
     # Error response function
     def built_in_validate_error() -> None:
         raise TypeError(f"This value type cannot be assigned: {type(checking)}('{checking}')\n"
                         f"-> Types can use: {validate_condition}")
+    # mode
+    checking_type = type(checking)
+    if mode == "B":
+        checking_type = checking_type.__base__
 
     # validate
     if any in validate_condition:
@@ -26,7 +35,7 @@ def built_in_validate_function(checking: any, validate_condition: tuple) -> None
     elif checking is None:
         if None not in validate_condition:
             built_in_validate_error()
-    elif type(checking) not in validate_condition:
+    elif checking_type not in validate_condition:
         built_in_validate_error()
     return
 
@@ -42,18 +51,22 @@ class DescriptorFramework(_abc.ABC):
     Can be used to create descriptor class.
     """
 
-    def __init__(self, *built_in_validate, initial_value: any = None):
+    def __init__(self, *built_in_validate, mode: str = "P"):
         """
             Initialize descriptor class.
 
         initial_value argument is not affected by built-in validators.
 
+        mode:
+            P: Perfect matching.
+            B: Base class matching.
+
         :param built_in_validate: Built-in validator conditions when assignment a value to a variable.
-        :param initial_value: Initial value of variable.
+        :param mode: Built-in validator matching mode.
         """
         # assignment values
         self.__built_in_validate = built_in_validate
-        self.__initial_value = initial_value
+        self.__mode = mode
         return
 
     @property
@@ -62,9 +75,9 @@ class DescriptorFramework(_abc.ABC):
         return self.__built_in_validate
 
     @property
-    def initial_value(self) -> any:
-        """ Return initial value assigned during self-initialization """
-        return self.__initial_value
+    def mode(self) -> str:
+        """ Return built-in validator matching mode """
+        return self.__mode
 
     @_abc.abstractmethod
     def validator(self, value: any) -> None:
@@ -85,6 +98,16 @@ class DescriptorFramework(_abc.ABC):
         self.__name = name
         return
 
+    @property
+    def owner(self):
+        """ Return owner class instance """
+        return self.__owner
+
+    @property
+    def name(self) -> str:
+        """ Return variable name """
+        return self.__name
+
     def __set__(self, instance: object, value: any) -> None:
         """
             Set a value to a variable.
@@ -93,7 +116,7 @@ class DescriptorFramework(_abc.ABC):
 
         # validate value
         # built-in
-        built_in_validate_function(value, self.__built_in_validate)
+        built_in_validate_function(value, self.__built_in_validate, mode=self.mode)
 
         #  add-on
         self.validator(value)
@@ -180,7 +203,6 @@ def _get_ContainerValidator(instance, container):
         """
             Container validate class
 
-        This class is inheritance class.
         Return class from _get_ContainerValidator function.
         """
 
