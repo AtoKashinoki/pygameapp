@@ -251,6 +251,11 @@ def _get_ContainerValidator(instance, container):
             super().__setitem__(key, value)
             return
 
+        def validator(self, *args) -> None:
+            """ Execute validator """
+            super().validator(*args)
+            return
+
     return ContainerValidator
 
 

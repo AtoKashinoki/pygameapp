@@ -34,9 +34,14 @@ class Blueprint(_abc.ABC):
     """
 
     # descriptor
-    position = _Descriptor(_Position)
-    size = _Descriptor(_Size)
-    attribute = _Descriptor(_Attribute)
+    position: _Position = _Descriptor(_Position)
+    size: _Size = _Descriptor(_Size)
+    attribute: _Attribute = _Descriptor(_Attribute)
+
+    @property
+    def rect(self):
+        """ Get self rect """
+        return _pygame.Rect((*self.position, *self.size))
 
     @_abc.abstractmethod
     def update(self, app_instance, UI_instance) -> None:
@@ -75,7 +80,8 @@ class Framework(Blueprint, _abc.ABC):
         :param initial_attribute: Object attributes.
         :param size_validate_mode: Object size class mode.
         """
-        self.position = _Position(initial_position)
+        self.position = _Position(initial_position, data_type=_numpy.float64)
+        print(self.position)
         self.size = _Size(initial_size, mode=size_validate_mode)
         self.attribute = _Attribute(
             dict() if initial_attribute is None else initial_attribute

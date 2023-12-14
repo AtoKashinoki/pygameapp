@@ -8,9 +8,6 @@ from pgapp.descriptor import (
     DescriptorFramework as _DescriptorFramework
 )
 
-# import display.type.vector.Size
-from pgapp.display.type.vector import Size as _Size
-
 
 """ use in ObjectFramework class """
 
