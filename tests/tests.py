@@ -1,3 +1,5 @@
+import pygame as _pygame
+
 import pgapp
 import time
 import pygame
@@ -5,45 +7,41 @@ import numpy
 
 
 @pgapp.display.Surface.Decorator(
-    initial_position=(10, 20), initial_size=(30, 40), initial_attribute={"Itest": "Itest"}
+    [10, 10], [10, 20]
 )
-class testObject(pgapp.display.Surface.Blueprint):
+class SurfaceTest(pgapp.display.Surface.Blueprint):
 
-    def __init__(self, *args, **kwargs):
-        self.attribute["test"] = "test"
-        self.image.fill("white")
-        speed = 0.1
-        self.movement = numpy.array([1., 1.]) * speed
+    def __init__(self, position):
+        self.image.fill("black")
+        self.position[:] = position
         return
 
-    def update(self, app_instance, UI_instance) -> None:
-        now = time.time()
-        for i, d in enumerate([600, 400]):
-            if d <= self.position[i] + self.size[i] or 0 >= self.position[i]:
-                self.movement[i] = -self.movement[i]
-                continue
-            continue
-        self.position += self.movement
-        print(self.position)
-        return
+    def update(self, app_instance, UI_instance) -> None: ...
 
-    def draw(self, master: pygame.Surface) -> None:
+    def draw(self, master: _pygame.Surface) -> None:
         master.blit(self.image, self.rect)
         return
 
 
+@pgapp.display.Objects.Decorator()
+class ObjectsTest(pgapp.display.Objects.Blueprint):
+    def update(self, app_instance, UI_instance) -> None: ...
+    def draw(self, master: _pygame.Surface) -> None: ...
+
+
 if __name__ == '__main__':
-    obj = testObject()
-    root = pygame.display.set_mode([600, 400])
+    root = pygame.display.set_mode([900, 600])
+    objects = ObjectsTest()
+    objects.objects["test"] = SurfaceTest([10, 10])
+    objects.objects["test2"] = SurfaceTest([880, 570])
     done = False
     while not done:
         events = pygame.event.get()
         for event in events:
             if event.type == pygame.QUIT:
                 done = True
-        obj.update("app", "UI")
-        root.fill("black")
-        obj.draw(root)
+        root.fill("White")
+        objects.update("", "")
+        objects.draw(root)
         pygame.display.update()
         continue
-    print(obj.position, obj.size, obj.attribute)

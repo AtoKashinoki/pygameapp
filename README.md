@@ -22,9 +22,9 @@ This module can be used to create pygame applications.
    - [x] Surface.py
      - [x] (1) Blueprint class
      - [x] (2) Surface rapper
-   - [ ] Objects.py
-     - [ ] (1) Blueprint class
-     - [ ] (2) Objects rapper
+   - [x] Objects.py
+     - [x] (1) Blueprint class
+     - [x] (2) Objects rapper
    - [ ] UI.py
      - [ ] (1) Blueprint class
      - [ ] (2) UI rapper

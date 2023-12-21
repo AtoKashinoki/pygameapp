@@ -81,9 +81,48 @@ class Framework(Blueprint, _abc.ABC):
         :param size_validate_mode: Object size class mode.
         """
         self.position = _Position(initial_position, data_type=_numpy.float64)
-        print(self.position)
         self.size = _Size(initial_size, mode=size_validate_mode)
         self.attribute = _Attribute(
             dict() if initial_attribute is None else initial_attribute
         )
+        return
+
+
+""" decorator framework class """
+
+
+class DecoratorFramework(_abc.ABC):
+    """
+        Decorator framework class.
+
+    This class is inheritance class.
+    Can be used to create display object classes.
+    """
+
+    def __init__(
+            self,
+            initial_position:
+            list[int | float] | tuple[int | float] | _numpy.ndarray[int | float]
+            = (0, 0),
+            initial_size: list[int] | tuple[int] | _numpy.ndarray[int] = (0, 0),
+            initial_attribute: dict = None,
+            size_validate_mode: str = "N",
+    ):
+        """
+            Set wrapper class instance values.
+        :param initial_position: Object position.
+        :param initial_size: Object size.
+        :param initial_attribute: Object attributes.
+        :param size_validate_mode: Object size class mode.
+        """
+        self.wrapper_args = (initial_position, initial_size, initial_attribute, size_validate_mode)
+        return
+
+    @_abc.abstractmethod
+    def __call__(self, wrapped_class):
+        """
+            Wrap surface classes with surface rappers.
+        :param wrapped_class: Class to wrap with SurfaceWrapper.
+        :return: Wrapped class with SurfaceWrapper.
+        """
         return

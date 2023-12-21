@@ -7,4 +7,5 @@ from pgapp.display import (
     type,
     ObjectFramework,
     Surface,
+    Objects,
 )
