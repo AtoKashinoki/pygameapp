@@ -29,7 +29,7 @@ class Blueprint(_ObjectFramework.Blueprint, _abc.ABC):
     """
         Objects blueprint class.
 
-    Thi is inheritance class.
+    This is inheritance class.
     Can be used to display surface class blueprint.
     """
 
@@ -49,10 +49,10 @@ class Decorator(_ObjectFramework.DecoratorFramework):
     """
 
     def __call__(self, wrapped_class):
-        return _object_wrapper(self, wrapped_class)
+        return _objects_wrapper(self, wrapped_class)
 
 
-def _object_wrapper(instance: Decorator, super_class):
+def _objects_wrapper(instance: Decorator, super_class):
     """
         Generate objects class.
     :param instance: Decorator class instance.

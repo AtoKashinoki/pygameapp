@@ -29,9 +29,17 @@ class ObjectsTest(pgapp.display.Objects.Blueprint):
     def draw(self, master: _pygame.Surface) -> None: ...
 
 
+@pgapp.display.UserInterface.Decorator("white")
+class UITest(pgapp.display.UserInterface.Blueprint):
+    def update(self, app_instance) -> None: ...
+    def draw(self, master: _pygame.Surface) -> None: ...
+
+
 if __name__ == '__main__':
     root = pygame.display.set_mode([900, 600])
+    ui = UITest()
     objects = ObjectsTest()
+    ui.objects["test"] = objects
     objects.objects["test"] = SurfaceTest([10, 10])
     objects.objects["test2"] = SurfaceTest([880, 570])
     done = False
@@ -40,8 +48,7 @@ if __name__ == '__main__':
         for event in events:
             if event.type == pygame.QUIT:
                 done = True
-        root.fill("White")
-        objects.update("", "")
-        objects.draw(root)
+        ui.update("")
+        ui.draw(root)
         pygame.display.update()
         continue

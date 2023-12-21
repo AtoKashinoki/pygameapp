@@ -10,3 +10,4 @@ class keys:
 class values:
     surface = "surface"
     objects = "objects"
+    user_interface = "user_interface"

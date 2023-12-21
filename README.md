@@ -21,13 +21,13 @@ This module can be used to create pygame applications.
      - [x] (1) ObjectFramework class
    - [x] Surface.py
      - [x] (1) Blueprint class
-     - [x] (2) Surface rapper
+     - [x] (2) Surface wrapper
    - [x] Objects.py
      - [x] (1) Blueprint class
-     - [x] (2) Objects rapper
-   - [ ] UI.py
-     - [ ] (1) Blueprint class
-     - [ ] (2) UI rapper
+     - [x] (2) Objects wrapper
+   - [x] UserInterface.py
+     - [x] (1) Blueprint class
+     - [x] (2) UI wrapper
    - [ ] Application.py
      - [ ] (1) Blueprint class
-     - [ ] (2) Application rapper
+     - [ ] (2) Application wrapper

@@ -8,4 +8,5 @@ from pgapp.display import (
     ObjectFramework,
     Surface,
     Objects,
+    UserInterface,
 )
