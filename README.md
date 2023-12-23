@@ -7,7 +7,7 @@ This module can be used to create pygame applications.
 
 ## develop
 
-### schedule ~~There is schedule appending
+### schedule ~~There is schedule appending~~
  - [x] Descriptor.py
    - [x] (1) DescriptorFramework class
    - [x] (2) Descriptor class
@@ -28,6 +28,6 @@ This module can be used to create pygame applications.
    - [x] UserInterface.py
      - [x] (1) Blueprint class
      - [x] (2) UI wrapper
-   - [ ] Application.py
-     - [ ] (1) Blueprint class
-     - [ ] (2) Application wrapper
+   - [x] Application.py
+     - [x] (1) Blueprint class
+     - [x] (2) Application wrapper

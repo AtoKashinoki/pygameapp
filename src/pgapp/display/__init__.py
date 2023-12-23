@@ -9,4 +9,5 @@ from pgapp.display import (
     Surface,
     Objects,
     UserInterface,
+    Application,
 )

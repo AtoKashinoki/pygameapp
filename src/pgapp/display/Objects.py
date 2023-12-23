@@ -18,7 +18,7 @@ from pgapp.display.type.dict import AttributeValidateDict as _AttributeValidateD
 # import ObjectFramework
 from pgapp.display import ObjectFramework as _ObjectFramework
 
-# import attribute key
+# import attribute key and value class
 from pgapp.display import attribute as _attribute
 
 
@@ -37,7 +37,7 @@ class Blueprint(_ObjectFramework.Blueprint, _abc.ABC):
     objects = _Descriptor(_AttributeValidateDict)
 
 
-""" Decorator and Rapper """
+""" Decorator and Wrapper """
 
 
 class Decorator(_ObjectFramework.DecoratorFramework):
@@ -78,7 +78,7 @@ def _objects_wrapper(instance: Decorator, super_class):
             _ObjectFramework.Framework.__init__(
                 self, *instance.wrapper_args
             )
-            self.objects = _AttributeValidateDict()
+            self.objects = _AttributeValidateDict(_attribute.values.objects, _attribute.values.surface)
 
             # set attribute
             self.attribute[_attribute.keys.object_type] = _attribute.values.objects

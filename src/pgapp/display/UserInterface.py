@@ -95,7 +95,7 @@ def _user_interface_wrapper(instance: Decorator, super_class):
             self.attribute = _Attribute(
                 dict() if initial_attribute is None else initial_attribute
             )
-            self.objects = _AttributeValidateDict()
+            self.objects = _AttributeValidateDict(_attribute.values.objects, _attribute.values.surface)
 
             # set attribute
             self.attribute[_attribute.keys.object_type] = _attribute.values.user_interface
