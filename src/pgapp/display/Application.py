@@ -8,19 +8,14 @@ import functools as _functools
 
 # import pygame and numpy
 import pygame as _pygame
-import numpy as _numpy
 
 # import descriptor
 from pgapp.descriptor import (
     Descriptor as _Descriptor,
-    DescriptorFramework as _DescriptorFramework,
 )
 
 # import attribute validator class
 from pgapp.display.type.dict import AttributeValidateDict as _AttributeValidateDict
-
-# import ObjectFramework
-from pgapp.display import ObjectFramework as _ObjectFramework
 
 # import attribute key and value class
 from pgapp.display import attribute as _attribute
@@ -76,10 +71,20 @@ class Decorator:
     """
 
     def __init__(self):
-        """ pass """
+        """
+            Application class decorator.
+
+        This class is decorator class.
+        Return ApplicationWrapper class.
+        """
         return
 
     def __call__(self, wrapped_class):
+        """
+            Return ApplicationWrapper class.
+        :param wrapped_class: Super class to wrapped in ApplicationWrapper.
+        :return: ApplicationWrapper(wrapped_class)
+        """
         return _application_wrapper(self, wrapped_class)
 
 
@@ -93,10 +98,14 @@ def _application_wrapper(instance: Decorator, super_class):
 
     @_functools.wraps(super_class, updated=())
     class ApplicationWrapper(super_class, Blueprint):
-        """ pass """
+        """
+            Application wrapper class.
+        """
 
         def __init__(self):
-            """ pass """
+            """
+                Initialize values.
+            """
             self.operations = {}
             self.user_interfaces = _AttributeValidateDict(_attribute.values.user_interface)
             self.main_user_interface = ""
@@ -126,7 +135,7 @@ def _application_wrapper(instance: Decorator, super_class):
                 # draw
                 self.__draw()
 
-                # pass
+                # clock process
                 clock.tick(self.framerate)
                 self.frame_count += 1
 
@@ -135,8 +144,11 @@ def _application_wrapper(instance: Decorator, super_class):
             self.__exit()
             return
 
-        def __setup(self):
-            """ pass """
+        def __setup(self) -> _pygame.time.Clock:
+            """
+                Method about pygame setup.
+            :return: pygame clock class.
+            """
             # pygame initialize
             _pygame.init()
 
@@ -157,8 +169,10 @@ def _application_wrapper(instance: Decorator, super_class):
             self.frame_count = 0
             return _pygame.time.Clock()
 
-        def __get_operations(self):
-            """ pass """
+        def __get_operations(self) -> None:
+            """
+                Method about pygame operations update.
+            """
             self.operations = {
                 key: value
                 for key, value in zip(
@@ -178,7 +192,10 @@ def _application_wrapper(instance: Decorator, super_class):
             return super().operation_check()
 
         def __system_special_keys(self) -> bool:
-            """ pass """
+            """
+                Method about key check.
+            :return: Exit while loop.
+            """
             for event in self.operations["event"]:
                 if event.type == _pygame.QUIT:
                     return True
@@ -188,20 +205,26 @@ def _application_wrapper(instance: Decorator, super_class):
             super_class.update(self)
             return
 
-        def __update(self):
-            """ pass """
+        def __update(self) -> None:
+            """
+                Method about tick update.
+            """
             self.update()
             self.user_interfaces[self.main_user_interface].update(self)
             return
 
-        def __draw(self):
-            """ pass """
+        def __draw(self) -> None:
+            """
+                Method about tick draw.
+            """
             self.user_interfaces[self.main_user_interface].draw(self.master)
             _pygame.display.update()
             return
 
-        def __exit(self):
-            """ pass """
+        def __exit(self) -> None:
+            """
+                Method about process when exit loop.
+            """
             return
 
     return ApplicationWrapper

@@ -16,7 +16,7 @@ This module can be used to create pygame applications.
  - [x] config.py
    - [x] (1) Config class
    - [x] (2) initialize config directory and display config
- - [ ] display
+ - [x] display
    - [x] ObjectFramework.py
      - [x] (1) ObjectFramework class
    - [x] Surface.py

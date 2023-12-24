@@ -59,7 +59,7 @@ class __InitializePygameApp:
         try:
             self.system_config = config.Config(file_path="config/system.config")
         except FileNotFoundError:
-            pass
+            ...
         self.initialize_configs()
         return
 
