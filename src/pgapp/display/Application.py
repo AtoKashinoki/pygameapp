@@ -225,6 +225,7 @@ def _application_wrapper(instance: Decorator, super_class):
             """
                 Method about process when exit loop.
             """
+            _pygame.quit()
             return
 
     return ApplicationWrapper
